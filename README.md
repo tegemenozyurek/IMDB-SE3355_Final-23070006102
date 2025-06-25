@@ -1,59 +1,103 @@
-# IMBD
+# IMDB Movie Database
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+A modern movie database application built with Angular, featuring user authentication, movie management, and a responsive design.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **User Authentication**: Login and registration system with email/password and Gmail integration
+- **MVC Architecture**: Model-View-Controller pattern implementation
+- **TypeScript**: Full type safety and modern JavaScript features
+- **Responsive Design**: Mobile-friendly interface
+- **Country/City Selection**: Dynamic dropdowns for user registration
+- **Route Protection**: AuthGuard for protected routes
 
+## Technologies Used
+
+- Angular 17
+- TypeScript
+- CSS3 with modern design
+- Local Storage for session management
+
+## Installation
+
+1. Clone the repository:
 ```bash
-ng serve
+git clone https://github.com/tegemenozyurek/IMDB-SE3355_Final-23070006102.git
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. Navigate to the project directory:
 ```bash
-ng generate component component-name
+cd IMDB-SE3355_Final-23070006102
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Install dependencies:
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
-
-To build the project run:
-
+4. Start the development server:
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+5. Open your browser and navigate to `http://localhost:4200`
 
-## Running unit tests
+## Demo Credentials
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **Username**: `user`
+- **Password**: `123456`
 
-```bash
-ng test
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── models/          # Data models and interfaces
+│   ├── services/        # Business logic and API services
+│   ├── components/      # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── guards/         # Route protection
+│   └── app.component.* # Main application component
+├── assets/             # Static assets
+└── styles/            # Global styles
 ```
 
-## Running end-to-end tests
+## Features Overview
 
-For end-to-end (e2e) testing, run:
+### Authentication System
+- User registration with validation
+- Login with username/password
+- Gmail login simulation
+- Session management with localStorage
+- Route protection with AuthGuard
 
-```bash
-ng e2e
-```
+### User Interface
+- Modern, responsive design
+- Login/Register form with mode switching
+- Country and city selection dropdowns
+- Error handling and validation messages
+- Loading states and animations
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Architecture
+- MVC pattern implementation
+- Service-based architecture
+- Component-based UI structure
+- Type-safe interfaces and models
 
-## Additional Resources
+## Contributing
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Author
+
+**Egemen Özyürek**
+- GitHub: [@tegemenozyurek](https://github.com/tegemenozyurek)
+- Student ID: 23070006102
+- Course: SE3355 Final Project

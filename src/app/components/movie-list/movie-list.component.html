@@ -1,0 +1,50 @@
+<div class="movie-list-container">
+  <div class="header">
+    <h2>Film Listesi</h2>
+    <button class="add-button" routerLink="/movies/add">Yeni Film Ekle</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <p>Filmler yükleniyor...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error && movies.length === 0" class="no-movies">
+    <p>Henüz film bulunmuyor.</p>
+  </div>
+
+  <div *ngIf="!loading && !error && movies.length > 0" class="movies-grid">
+    <div *ngFor="let movie of movies" class="movie-card">
+      <div class="movie-poster">
+        <img *ngIf="movie.posterUrl" [src]="movie.posterUrl" [alt]="movie.title">
+        <div *ngIf="!movie.posterUrl" class="no-poster">
+          <span>Poster Yok</span>
+        </div>
+      </div>
+      
+      <div class="movie-info">
+        <h3 class="movie-title">{{ movie.title }}</h3>
+        <p class="movie-director">Yönetmen: {{ movie.director }}</p>
+        <p class="movie-year">Yıl: {{ movie.year }}</p>
+        <p class="movie-genre">Tür: {{ movie.genre }}</p>
+        <div class="movie-rating">
+          <span class="rating-label">Puan:</span>
+          <span class="rating-value">{{ movie.rating }}/10</span>
+        </div>
+        <p class="movie-description">{{ movie.description }}</p>
+      </div>
+
+      <div class="movie-actions">
+        <button class="edit-button" [routerLink]="['/movies', movie.id, 'edit']">
+          Düzenle
+        </button>
+        <button class="delete-button" (click)="deleteMovie(movie.id)">
+          Sil
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 
