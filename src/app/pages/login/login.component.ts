@@ -15,6 +15,7 @@ import { LoginCredentials, RegisterCredentials, Country } from '../../models/aut
 export class LoginComponent implements OnInit {
   isLoginMode = true;
   isGmailLogin = false;
+  currentStep = 1; // For multi-step registration
   
   credentials: LoginCredentials = {
     username: '',
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
 
   switchMode(): void {
     this.isLoginMode = !this.isLoginMode;
+    this.currentStep = 1; // Reset to step 1 when switching modes
     this.error = '';
     this.loading = false;
   }
@@ -79,6 +81,63 @@ export class LoginComponent implements OnInit {
     this.error = '';
   }
 
+  // Multi-step navigation methods
+  nextStep(): void {
+    if (this.currentStep < 3) {
+      if (this.validateCurrentStep()) {
+        this.currentStep++;
+        this.error = '';
+      }
+    }
+  }
+
+  prevStep(): void {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+      this.error = '';
+    }
+  }
+
+  validateCurrentStep(): boolean {
+    switch (this.currentStep) {
+      case 1:
+        if (!this.registerData.name || !this.registerData.surname) {
+          this.error = 'First name and last name are required';
+          return false;
+        }
+        break;
+      case 2:
+        if (!this.registerData.email) {
+          this.error = 'Email is required';
+          return false;
+        }
+        if (!/\S+@\S+\.\S+/.test(this.registerData.email)) {
+          this.error = 'Please enter a valid email address';
+          return false;
+        }
+        break;
+      case 3:
+        if (!this.registerData.password || !this.registerData.repassword) {
+          this.error = 'Password and confirm password are required';
+          return false;
+        }
+        if (this.registerData.password !== this.registerData.repassword) {
+          this.error = 'Passwords do not match';
+          return false;
+        }
+        if (this.registerData.password.length < 6) {
+          this.error = 'Password must be at least 6 characters long';
+          return false;
+        }
+        if (!this.registerData.country || !this.registerData.city) {
+          this.error = 'Country and city are required';
+          return false;
+        }
+        break;
+    }
+    return true;
+  }
+
   onSubmit(): void {
     if (this.isGmailLogin) {
       this.handleGmailLogin();
@@ -88,7 +147,11 @@ export class LoginComponent implements OnInit {
     if (this.isLoginMode) {
       this.handleLogin();
     } else {
-      this.handleRegister();
+      if (this.currentStep < 3) {
+        this.nextStep();
+      } else {
+        this.handleRegister();
+      }
     }
   }
 

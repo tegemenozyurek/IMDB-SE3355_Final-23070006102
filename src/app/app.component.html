@@ -1,4 +1,4 @@
-<div class="app-container" *ngIf="currentUser">
+<div class="app-container" *ngIf="shouldShowNavbar">
   <header class="app-header">
     <nav class="nav-container">
       <div class="nav-brand">
@@ -10,7 +10,7 @@
         <li><a routerLink="/movies" routerLinkActive="active">Movies</a></li>
       </ul>
       <div class="user-info">
-        <span class="username">{{ currentUser.username }}</span>
+        <span class="username">{{ currentUser?.username }}</span>
         <button class="logout-button" (click)="logout()">Logout</button>
       </div>
     </nav>
@@ -28,6 +28,6 @@
 </div>
 
 <!-- Login sayfası için ayrı container -->
-<div *ngIf="!currentUser">
+<div *ngIf="!shouldShowNavbar">
   <router-outlet></router-outlet>
 </div>
