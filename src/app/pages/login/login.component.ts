@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoginCredentials, RegisterCredentials, Country } from '../../models/auth.model';
 
@@ -41,11 +41,20 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.loadCountries();
+
+    // Check if we should start in register mode
+    this.route.queryParams.subscribe(params => {
+      if (params['mode'] === 'register') {
+        this.isLoginMode = false;
+        this.currentStep = 1;
+      }
+    });
   }
 
   loadCountries(): void {
@@ -101,12 +110,22 @@ export class LoginComponent implements OnInit {
   validateCurrentStep(): boolean {
     switch (this.currentStep) {
       case 1:
+        // Step 1: Name and Surname
         if (!this.registerData.name || !this.registerData.surname) {
           this.error = 'First name and last name are required';
           return false;
         }
+        if (this.registerData.name.length < 2) {
+          this.error = 'First name must be at least 2 characters';
+          return false;
+        }
+        if (this.registerData.surname.length < 2) {
+          this.error = 'Last name must be at least 2 characters';
+          return false;
+        }
         break;
       case 2:
+        // Step 2: Email, Password, Password Again
         if (!this.registerData.email) {
           this.error = 'Email is required';
           return false;
@@ -115,8 +134,6 @@ export class LoginComponent implements OnInit {
           this.error = 'Please enter a valid email address';
           return false;
         }
-        break;
-      case 3:
         if (!this.registerData.password || !this.registerData.repassword) {
           this.error = 'Password and confirm password are required';
           return false;
@@ -129,6 +146,9 @@ export class LoginComponent implements OnInit {
           this.error = 'Password must be at least 6 characters long';
           return false;
         }
+        break;
+      case 3:
+        // Step 3: Country and City
         if (!this.registerData.country || !this.registerData.city) {
           this.error = 'Country and city are required';
           return false;
@@ -138,7 +158,7 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
-  onSubmit(): void {
+    onSubmit(): void {
     if (this.isGmailLogin) {
       this.handleGmailLogin();
       return;
@@ -147,10 +167,11 @@ export class LoginComponent implements OnInit {
     if (this.isLoginMode) {
       this.handleLogin();
     } else {
+      // Register mode
       if (this.currentStep < 3) {
         this.nextStep();
-    } else {
-      this.handleRegister();
+      } else {
+        this.handleRegister();
       }
     }
   }

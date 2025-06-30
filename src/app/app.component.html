@@ -8,77 +8,218 @@
     <nav class="imdb-navbar">
       <div class="navbar-container">
 
-        <!-- Left Section: Logo + Menu + Dropdown -->
-        <div class="navbar-left">
-          <!-- IMDb Logo -->
-          <div class="logo-container">
-            <img src="/logo.png" alt="IMDb" class="imdb-logo">
-          </div>
-
-          <!-- Hamburger Menu Button -->
-          <div class="menu-button">
-            <div class="hamburger-icon">
-              <span></span>
-              <span></span>
-              <span></span>
+        <!-- Desktop Layout -->
+        <div class="navbar-top-row desktop-navbar">
+          <!-- Left Section: Logo + Menu + Search -->
+          <div class="navbar-left">
+            <!-- IMDb Logo -->
+            <div class="logo-container">
+              <img src="/logo.png" alt="IMDb" class="imdb-logo">
             </div>
-            <span class="menu-text">Menu</span>
+
+            <!-- Hamburger Menu Button -->
+            <div class="menu-button">
+              <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span class="menu-text">Menu</span>
+            </div>
+
+            <!-- Search Bar (Desktop) -->
+            <div class="navbar-center desktop-search">
+              <div class="search-container">
+                <div class="search-wrapper">
+                  <!-- All Dropdown inside search bar -->
+                  <div class="search-dropdown-container">
+                    <button class="search-dropdown-button" (click)="toggleSearchDropdown($event)">
+                      <span>{{ selectedSearchCategory }}</span>
+                      <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7 10l5 5 5-5z"/>
+                      </svg>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="search-dropdown-menu" *ngIf="isSearchDropdownOpen">
+                      <div class="dropdown-option" (click)="selectSearchCategory('All', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <span>All</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('Titles', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                        </svg>
+                        <span>Titles</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('TV Episodes', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5l-1 2v1h8v-1l-1-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12H3V5h18v10z"/>
+                        </svg>
+                        <span>TV Episodes</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('Celebs', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>Celebs</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('Companies', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+                        </svg>
+                        <span>Companies</span>
+                      </div>
+                    </div>
+                  </div>
+                  <input type="text" placeholder="Search IMDb" class="search-input">
+                  <button class="search-button" title="Search" aria-label="Search">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- All Dropdown -->
-          <div class="dropdown-container">
-            <button class="dropdown-button">
-              <span>All</span>
-              <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="currentColor">
+          <!-- Right Section: IMDbPro, Watchlist, Sign In, Language -->
+          <div class="navbar-right">
+            <!-- IMDbPro -->
+            <div class="imdbpro-container" (click)="openIMDbProModal()">
+              <span class="imdbpro-text">IMDb</span>
+              <span class="pro-text">Pro</span>
+            </div>
+
+            <!-- Watchlist -->
+            <div class="watchlist-container">
+              <svg class="watchlist-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10A8,8 0 0,0 14,2M14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4A6,6 0 0,1 20,10A6,6 0 0,1 14,16M15.5,11L14,9.5L12.5,11L14,12.5L15.5,11M9,11A1,1 0 0,1 10,10A1,1 0 0,1 9,9A1,1 0 0,1 8,10A1,1 0 0,1 9,11Z"/>
+              </svg>
+              <span class="watchlist-text">Watchlist</span>
+            </div>
+
+            <!-- Sign In -->
+            <div class="signin-container" (click)="openSignInModal()">
+              <span class="signin-text">Sign In</span>
+            </div>
+
+            <!-- Language Selector -->
+            <div class="language-container">
+              <span class="language-text">EN</span>
+              <svg class="language-arrow" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7 10l5 5 5-5z"/>
               </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Center Section: Search Bar -->
-        <div class="navbar-center">
-          <div class="search-container">
-            <div class="search-wrapper">
-              <input type="text" placeholder="Search IMDb" class="search-input">
-              <button class="search-button" title="Search" aria-label="Search">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                </svg>
-              </button>
             </div>
           </div>
         </div>
 
-        <!-- Right Section: IMDbPro, Watchlist, Sign In, Language -->
-        <div class="navbar-right">
-          <!-- IMDbPro -->
-          <div class="imdbpro-container">
-            <span class="imdbpro-text">IMDb</span>
-            <span class="pro-text">Pro</span>
+        <!-- Mobile Layout -->
+        <div class="mobile-navbar">
+          <div class="mobile-nav-header">
+            <!-- IMDb Logo -->
+            <div class="logo-container">
+              <img src="/logo.png" alt="IMDb" class="imdb-logo">
+            </div>
+
+            <!-- Hamburger Menu Button -->
+            <button class="mobile-hamburger" (click)="toggleMobileMenu()" [class.active]="mobileMenuOpen" title="Toggle menu" aria-label="Toggle mobile menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
           </div>
 
-          <!-- Watchlist -->
-          <div class="watchlist-container">
-            <svg class="watchlist-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10A8,8 0 0,0 14,2M14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4A6,6 0 0,1 20,10A6,6 0 0,1 14,16M15.5,11L14,9.5L12.5,11L14,12.5L15.5,11M9,11A1,1 0 0,1 10,10A1,1 0 0,1 9,9A1,1 0 0,1 8,10A1,1 0 0,1 9,11Z"/>
-            </svg>
-            <span class="watchlist-text">Watchlist</span>
-          </div>
+          <!-- Mobile Menu (Collapsible) -->
+          <div class="mobile-menu" [class.open]="mobileMenuOpen">
+            <!-- Search Bar -->
+            <div class="mobile-search-section">
+              <div class="search-container">
+                <div class="search-wrapper">
+                  <div class="search-dropdown-container">
+                    <button class="search-dropdown-button" (click)="toggleSearchDropdown($event)">
+                      <span>{{ selectedSearchCategory }}</span>
+                      <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7 10l5 5 5-5z"/>
+                      </svg>
+                    </button>
+                    <div class="search-dropdown-menu" *ngIf="isSearchDropdownOpen">
+                      <div class="dropdown-option" (click)="selectSearchCategory('All', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <span>All</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('Titles', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                        </svg>
+                        <span>Titles</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('TV Episodes', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5l-1 2v1h8v-1l-1-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12H3V5h18v10z"/>
+                        </svg>
+                        <span>TV Episodes</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('Celebs', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>Celebs</span>
+                      </div>
+                      <div class="dropdown-option" (click)="selectSearchCategory('Companies', $event)">
+                        <svg class="option-icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+                        </svg>
+                        <span>Companies</span>
+                      </div>
+                    </div>
+                  </div>
+                  <input type="text" placeholder="Search IMDb" class="search-input">
+                  <button class="search-button" title="Search" aria-label="Search">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
 
-          <!-- Sign In -->
-          <div class="signin-container">
-            <span class="signin-text">Sign In</span>
-          </div>
+                        <!-- Menu Items -->
+            <div class="mobile-menu-items">
+              <div class="menu-item" (click)="openIMDbProModal(); toggleMobileMenu()">
+                <span class="imdbpro-text">IMDb</span>
+                <span class="pro-text">Pro</span>
+              </div>
 
-          <!-- Language Selector -->
-          <div class="language-container">
-            <span class="language-text">EN</span>
-            <svg class="language-arrow" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M7 10l5 5 5-5z"/>
-            </svg>
+              <div class="menu-item" (click)="toggleMobileMenu()">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10A8,8 0 0,0 14,2M14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4A6,6 0 0,1 20,10A6,6 0 0,1 14,16M15.5,11L14,9.5L12.5,11L14,12.5L15.5,11M9,11A1,1 0 0,1 10,10A1,1 0 0,1 9,9A1,1 0 0,1 8,10A1,1 0 0,1 9,11Z"/>
+                </svg>
+                <span>Watchlist</span>
+              </div>
+
+              <div class="menu-item" (click)="openSignInModal(); toggleMobileMenu()">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <span>Sign In</span>
+              </div>
+
+              <div class="menu-item" (click)="toggleMobileMenu()">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H16V4h-5V2h-2v2H4v2h8.17A15.52 15.52 0 0 1 11.4 11.2l-3.7-3.7-1.41 1.41 4.72 4.72 1.86-1.86zM7.72 18.48l-1.42-1.42L6.3 17.06c.15-.1.29-.2.44-.29l1.41 1.42c-.15.09-.29.19-.43.29zm-3.47-7.11L2.83 9.95l.71-.71 1.42 1.42-.71.71z"/>
+                </svg>
+                <span>Language (EN)</span>
+              </div>
+            </div>
           </div>
-      </div>
+        </div>
+
+
+
       </div>
     </nav>
   </header>
@@ -102,6 +243,278 @@
       </div>
     </div>
   </footer>
+
+  <!-- Sign In Modal -->
+  <div class="signin-modal-overlay" *ngIf="isSignInModalOpen" (click)="closeSignInModal()">
+    <div class="signin-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Sign In</h2>
+        <button class="close-button" (click)="closeSignInModal()">×</button>
+      </div>
+      <div class="modal-content">
+        <p>Choose how you want to sign in to IMDb</p>
+        <button class="signin-option-btn" (click)="navigateToLogin()">
+          <span>Sign in with IMDb</span>
+        </button>
+        <div class="divider">
+          <span>or</span>
+        </div>
+        <button class="signin-option-btn google-btn">
+          <span>Sign in with Google</span>
+        </button>
+        <div class="modal-footer">
+          <p>New to IMDb? <a href="#" (click)="navigateToRegister(); $event.preventDefault(); $event.stopPropagation()">Create account</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div class="signin-modal-overlay" *ngIf="isRegisterModalOpen" (click)="closeRegisterModal()">
+    <div class="signin-modal register-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Create Account</h2>
+        <button class="close-button" (click)="closeRegisterModal()">×</button>
+      </div>
+      <div class="modal-content">
+        <!-- Step Header -->
+        <div class="step-header">
+          <h3 class="step-title">
+            <span *ngIf="registerCurrentStep === 1">Step 1: Personal Information</span>
+            <span *ngIf="registerCurrentStep === 2">Step 2: Account Details</span>
+            <span *ngIf="registerCurrentStep === 3">Step 3: Location</span>
+          </h3>
+          <p class="step-description">
+            <span *ngIf="registerCurrentStep === 1">Tell us your name</span>
+            <span *ngIf="registerCurrentStep === 2">Set up your email and password</span>
+            <span *ngIf="registerCurrentStep === 3">Choose your country and city</span>
+          </p>
+        </div>
+
+        <!-- Step 1: Name and Surname -->
+        <div *ngIf="registerCurrentStep === 1" class="register-step">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input
+              type="text"
+              [(ngModel)]="registerData.name"
+              class="form-control"
+              placeholder="Enter your first name"
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input
+              type="text"
+              [(ngModel)]="registerData.surname"
+              class="form-control"
+              placeholder="Enter your last name"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Step 2: Email, Password, Password Again -->
+        <div *ngIf="registerCurrentStep === 2" class="register-step">
+                     <div class="form-group">
+             <label class="form-label">Email</label>
+             <input
+               type="email"
+               [(ngModel)]="registerData.email"
+               class="form-control"
+               placeholder="Enter your email address"
+               required
+               autocomplete="new-email"
+               name="register-email"
+             >
+           </div>
+           <div class="form-group">
+             <label class="form-label">Password</label>
+             <input
+               type="password"
+               [(ngModel)]="registerData.password"
+               class="form-control"
+               placeholder="Enter your password"
+               required
+               autocomplete="new-password"
+               name="register-new-password"
+             >
+           </div>
+           <div class="form-group">
+             <label class="form-label">Confirm Password</label>
+             <input
+               type="password"
+               [(ngModel)]="registerData.repassword"
+               class="form-control"
+               placeholder="Confirm your password"
+               required
+               autocomplete="new-password"
+               name="register-confirm-password"
+             >
+           </div>
+        </div>
+
+        <!-- Step 3: Country and City -->
+        <div *ngIf="registerCurrentStep === 3" class="register-step">
+          <div class="form-group">
+            <label class="form-label">Country</label>
+            <select
+              [(ngModel)]="selectedCountryCode"
+              (change)="onRegisterCountryChange($any($event.target).value)"
+              class="form-control"
+              required
+              aria-label="Select country"
+              title="Select country"
+            >
+              <option value="">Select country</option>
+              <option *ngFor="let country of countries" [value]="country.code">
+                {{ country.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <select
+              [(ngModel)]="registerData.city"
+              class="form-control"
+              required
+              [disabled]="!selectedCountryCode"
+              aria-label="Select city"
+              title="Select city"
+            >
+              <option value="">Select city</option>
+              <option *ngFor="let city of cities" [value]="city">
+                {{ city }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="registerError" class="error-message">
+          {{ registerError }}
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="step-navigation">
+          <button
+            type="button"
+            class="prev-button"
+            (click)="registerPrevStep()"
+            *ngIf="registerCurrentStep > 1"
+          >
+            Previous
+          </button>
+          <div class="step-dots">
+            <span class="dot" [class.active]="registerCurrentStep === 1"></span>
+            <span class="dot" [class.active]="registerCurrentStep === 2"></span>
+            <span class="dot" [class.active]="registerCurrentStep === 3"></span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="signin-option-btn"
+          [disabled]="registerLoading"
+          (click)="registerNextStep()"
+        >
+          <span *ngIf="!registerLoading">
+            {{ registerCurrentStep < 3 ? 'Next' : 'Create Account' }}
+          </span>
+          <span *ngIf="registerLoading">
+            {{ registerCurrentStep < 3 ? 'Validating...' : 'Creating Account...' }}
+          </span>
+        </button>
+
+                 <div class="modal-footer">
+           <p>Already have an account? <a href="#" (click)="closeRegisterModal(); openSignInModal(); $event.preventDefault(); $event.stopPropagation()">Sign in</a></p>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMDbPro Modal -->
+  <div class="imdbpro-modal-overlay" *ngIf="isIMDbProModalOpen" (click)="closeIMDbProModal()">
+    <div class="imdbpro-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="imdbpro-logo">
+          <span class="imdbpro-text">IMDb</span>
+          <span class="pro-text">Pro</span>
+        </div>
+        <button class="close-button" (click)="closeIMDbProModal()">×</button>
+      </div>
+      <div class="modal-content">
+        <div class="imdbpro-hero">
+          <h2>Unlock the Power of Entertainment Industry Data</h2>
+          <p>Get the industry's most comprehensive database and professional tools.</p>
+        </div>
+
+        <div class="imdbpro-features">
+          <div class="feature-card">
+            <div class="feature-icon">🎬</div>
+            <h3>Industry Database</h3>
+            <p>Access detailed contact information for entertainment professionals</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Box Office Data</h3>
+            <p>Real-time and historical box office performance data</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Talent Representation</h3>
+            <p>Find and connect with agents, managers, and publicists</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Awards & Recognition</h3>
+            <p>Track industry awards and festival submissions</p>
+          </div>
+        </div>
+
+        <div class="imdbpro-pricing">
+          <div class="pricing-card">
+            <h3>Monthly Plan</h3>
+            <div class="price">$19.99<span>/month</span></div>
+            <ul>
+              <li>Full access to industry database</li>
+              <li>Contact information</li>
+              <li>Box office data</li>
+              <li>Talent representation info</li>
+            </ul>
+            <button class="subscribe-btn">Start Free Trial</button>
+          </div>
+
+          <div class="pricing-card featured">
+            <div class="popular-badge">Most Popular</div>
+            <h3>Annual Plan</h3>
+            <div class="price">$149.99<span>/year</span></div>
+            <div class="savings">Save 37%</div>
+            <ul>
+              <li>Everything in Monthly Plan</li>
+              <li>Advanced search filters</li>
+              <li>Export capabilities</li>
+              <li>Priority customer support</li>
+            </ul>
+            <button class="subscribe-btn featured">Start Free Trial</button>
+          </div>
+        </div>
+
+        <div class="imdbpro-footer">
+          <p>Join over 1 million entertainment professionals worldwide</p>
+          <div class="trust-badges">
+            <span>✓ 30-day free trial</span>
+            <span>✓ Cancel anytime</span>
+            <span>✓ Industry standard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Login/Register Page Container -->

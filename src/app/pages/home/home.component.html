@@ -6,17 +6,29 @@
     <h1 class="section-title">Top 10 on IMDb this week</h1>
   </div>
 
-  <!-- Movie Grid Container with Auto Scroll -->
+  <!-- Movie Grid Container with Manual Controls -->
   <div class="movie-grid-wrapper">
+        <!-- Navigation Buttons -->
+    <button class="nav-button nav-button-prev" (click)="prevSlide()" [disabled]="currentIndex === 0" aria-label="Previous slide" title="Previous slide">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+
+    <button class="nav-button nav-button-next" (click)="nextSlideManual()" [disabled]="currentIndex === maxIndex" aria-label="Next slide" title="Next slide">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+      </svg>
+    </button>
+
     <div class="movie-grid-container" #movieGrid>
       <!-- Movie Card 1 - 3 Body Problem -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">1</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWFjYjUtMGZhNzQ3ODk4Njc0XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg" alt="3 Body Problem" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWFjYjUtMGZhNzQ3ODk4Njc0XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg" alt="3 Body Problem" class="movie-poster">
           <div class="creators-tag netflix-tag">FROM THE CREATORS OF GAME OF THRONES<br>A NETFLIX SERIES</div>
           <div class="date-tag">MARCH 21</div>
         </div>
@@ -26,7 +38,7 @@
             <span class="rating-number">7.7</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">1. 3 Body Problem</h3>
+          <h3 class="movie-title">3 Body Problem</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -43,11 +55,10 @@
       <!-- Movie Card 2 - Shōgun -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">2</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNGFlYWQzNTQtZjI0OS00MDgyLTk1NzMtMDcxZjhjZTI2M2Q1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Shōgun" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BNGFlYWQzNTQtZjI0OS00MDgyLTk1NzMtMDcxZjhjZTI2M2Q1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Shōgun" class="movie-poster">
           <div class="fx-logo">FX</div>
           <div class="date-tag">FEB 2024 hulu FX</div>
         </div>
@@ -57,7 +68,7 @@
             <span class="rating-number">9.1</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">2. Shōgun</h3>
+          <h3 class="movie-title">Shōgun</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -74,11 +85,10 @@
       <!-- Movie Card 3 - Godzilla x Kong -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">3</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg" alt="Godzilla x Kong: The New Empire" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg" alt="Godzilla x Kong: The New Empire" class="movie-poster">
           <div class="date-tag white-tag">MARCH 29</div>
         </div>
         <div class="movie-details">
@@ -87,7 +97,7 @@
             <span class="rating-number">6.6</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">3. Godzilla X Kong:<br>The New Empire</h3>
+          <h3 class="movie-title">Godzilla X Kong:<br>The New Empire</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -104,11 +114,10 @@
       <!-- Movie Card 4 - The Gentlemen -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">4</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNDhkMGYxYWItZTJhZC00Y2Q4LTljOWYtMDJhMzM5NTI0ZTViXkEyXkFqcGdeQXVyMTMzNzIyNDc1._V1_FMjpg_UX1000_.jpg" alt="The Gentlemen" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BNDhkMGYxYWItZTJhZC00Y2Q4LTljOWYtMDJhMzM5NTI0ZTViXkEyXkFqcGdeQXVyMTMzNzIyNDc1._V1_FMjpg_UX1000_.jpg" alt="The Gentlemen" class="movie-poster">
           <div class="netflix-badge">ONLY ON<br>NETFLIX • 7 MAR</div>
         </div>
         <div class="movie-details">
@@ -117,7 +126,7 @@
             <span class="rating-number">8.2</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">4. The Gentlemen</h3>
+          <h3 class="movie-title">The Gentlemen</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -134,11 +143,10 @@
       <!-- Movie Card 5 - Road House -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">5</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BZWQxMjcwNjItZjI0ZC00ZTc4LWIwMzItM2Q0YTZhNzI3NzdlXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg" alt="Road House" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BZWQxMjcwNjItZjI0ZC00ZTc4LWIwMzItM2Q0YTZhNzI3NzdlXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg" alt="Road House" class="movie-poster">
           <div class="prime-logo">prime</div>
         </div>
         <div class="movie-details">
@@ -147,7 +155,7 @@
             <span class="rating-number">6.2</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">5. Road House</h3>
+          <h3 class="movie-title">Road House</h3>
           <div class="watch-options">Watch options</div>
         </div>
         <div class="trailer-section">
@@ -161,11 +169,10 @@
       <!-- Movie Card 6 - Dune: Part Two -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">6</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNGM3ZjkzZGEtMzYzZC00Y2Y1LWI3ZmQtYWQzOWI1NjliNTg5XkEyXkFqcGdeQXVyMTY3ODkyNDkz._V1_FMjpg_UX1000_.jpg" alt="Dune: Part Two" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BNGM3ZjkzZGEtMzYzZC00Y2Y1LWI3ZmQtYWQzOWI1NjliNTg5XkEyXkFqcGdeQXVyMTY3ODkyNDkz._V1_FMjpg_UX1000_.jpg" alt="Dune: Part Two" class="movie-poster">
           <div class="date-tag white-tag">MARCH 1</div>
         </div>
         <div class="movie-details">
@@ -174,7 +181,7 @@
             <span class="rating-number">8.8</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">6. Dune: Part Two</h3>
+          <h3 class="movie-title">Dune: Part Two</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -191,11 +198,10 @@
       <!-- Movie Card 7 - Avatar: The Last Airbender -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">7</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg" alt="Avatar: The Last Airbender" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg" alt="Avatar: The Last Airbender" class="movie-poster">
           <div class="netflix-badge">NETFLIX<br>SERIES</div>
         </div>
         <div class="movie-details">
@@ -204,7 +210,7 @@
             <span class="rating-number">7.1</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">7. Avatar: The Last Airbender</h3>
+          <h3 class="movie-title">Avatar: The Last Airbender</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -221,11 +227,10 @@
       <!-- Movie Card 8 - The Bear -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">8</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWFjYjUtMGZhNzQ3ODk4Njc0XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg" alt="The Bear" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWFjYjUtMGZhNzQ3ODk4Njc0XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg" alt="The Bear" class="movie-poster">
           <div class="fx-logo">FX</div>
         </div>
         <div class="movie-details">
@@ -234,7 +239,7 @@
             <span class="rating-number">8.7</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">8. The Bear</h3>
+          <h3 class="movie-title">The Bear</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -251,11 +256,10 @@
       <!-- Movie Card 9 - Nobody Wants This -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">9</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNGFlYWQzNTQtZjI0OS00MDgyLTk1NzMtMDcxZjhjZTI2M2Q1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Nobody Wants This" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BNGFlYWQzNTQtZjI0OS00MDgyLTk1NzMtMDcxZjhjZTI2M2Q1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Nobody Wants This" class="movie-poster">
           <div class="netflix-badge">NETFLIX<br>SERIES</div>
         </div>
         <div class="movie-details">
@@ -264,7 +268,7 @@
             <span class="rating-number">7.9</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">9. Nobody Wants This</h3>
+          <h3 class="movie-title">Nobody Wants This</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -281,11 +285,10 @@
       <!-- Movie Card 10 - House of the Dragon -->
       <div class="movie-card">
         <div class="poster-container">
-          <div class="rank-number">10</div>
-          <img src="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg" alt="House of the Dragon" class="movie-poster">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
+          <img src="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg" alt="House of the Dragon" class="movie-poster">
           <div class="hbo-badge">HBO<br>SERIES</div>
         </div>
         <div class="movie-details">
@@ -294,7 +297,7 @@
             <span class="rating-number">8.4</span>
             <span class="star-outline">☆</span>
           </div>
-          <h3 class="movie-title">10. House of the Dragon</h3>
+          <h3 class="movie-title">House of the Dragon</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -307,6 +310,19 @@
           </button>
         </div>
       </div>
+    </div>
+
+        <!-- Slide Indicators -->
+    <div class="slide-indicators">
+      <button
+        *ngFor="let item of [].constructor(maxIndex + 1); let i = index"
+        class="indicator"
+        [class.active]="i === currentIndex"
+        (click)="goToSlide(i)"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"
+        [attr.title]="'Go to slide ' + (i + 1)">
+        <span class="sr-only">{{i + 1}}</span>
+      </button>
     </div>
   </div>
   </div>

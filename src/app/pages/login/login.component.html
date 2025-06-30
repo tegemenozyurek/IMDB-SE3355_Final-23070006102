@@ -37,7 +37,7 @@
     </div>
 
     <!-- Normal Giriş/Kayıt Formu -->
-    <form (ngSubmit)="onSubmit()" class="login-form" *ngIf="!isGmailLogin">
+    <form (ngSubmit)="$event.preventDefault()" class="login-form" *ngIf="!isGmailLogin">
       <!-- Login Form -->
       <div *ngIf="isLoginMode">
         <div class="form-group">
@@ -69,6 +69,20 @@
 
       <!-- Register Form -->
       <div *ngIf="!isLoginMode">
+        <!-- Step Header -->
+        <div class="step-header">
+          <h3 class="step-title">
+            <span *ngIf="currentStep === 1">Step 1: Personal Information</span>
+            <span *ngIf="currentStep === 2">Step 2: Account Details</span>
+            <span *ngIf="currentStep === 3">Step 3: Location</span>
+          </h3>
+          <p class="step-description">
+            <span *ngIf="currentStep === 1">Tell us your name</span>
+            <span *ngIf="currentStep === 2">Set up your email and password</span>
+            <span *ngIf="currentStep === 3">Choose your country and city</span>
+          </p>
+        </div>
+
         <!-- Step 1: Personal Information -->
         <div *ngIf="currentStep === 1">
           <div class="form-group">
@@ -97,30 +111,26 @@
           </div>
         </div>
 
-        <!-- Step 2: Email -->
+        <!-- Step 2: Email, Password, Password Again -->
         <div *ngIf="currentStep === 2">
-        <div class="form-group">
-          <label for="email" class="form-label">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            [(ngModel)]="registerData.email"
-            class="form-control"
-            placeholder="Enter your email address"
-            required
-          >
-          </div>
-        </div>
-
-        <!-- Step 3: Password and Location -->
-        <div *ngIf="currentStep === 3">
           <div class="form-group">
-            <label for="password" class="form-label">Password</label>
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="registerData.email"
+              class="form-control"
+              placeholder="Enter your email address"
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label for="register-password" class="form-label">Password</label>
             <input
               type="password"
-              id="password"
-              name="password"
+              id="register-password"
+              name="register-password"
               [(ngModel)]="registerData.password"
               class="form-control"
               placeholder="Enter your password"
@@ -139,6 +149,10 @@
               required
             >
           </div>
+        </div>
+
+        <!-- Step 3: Country and City -->
+        <div *ngIf="currentStep === 3">
           <div class="form-group">
             <label for="country" class="form-label">Country</label>
             <select
@@ -205,12 +219,17 @@
       </div>
 
       <button
-        type="submit"
+        type="button"
         class="submit-button"
         [disabled]="loading"
+        (click)="onSubmit()"
       >
-        <span *ngIf="!loading">{{ isLoginMode ? 'Login' : 'Register' }}</span>
-        <span *ngIf="loading">{{ isLoginMode ? 'Logging in...' : 'Registering...' }}</span>
+        <span *ngIf="!loading">
+          {{ isLoginMode ? 'Login' : (currentStep < 3 ? 'Next' : 'Create Account') }}
+        </span>
+        <span *ngIf="loading">
+          {{ isLoginMode ? 'Logging in...' : (currentStep < 3 ? 'Validating...' : 'Creating Account...') }}
+        </span>
       </button>
     </form>
 

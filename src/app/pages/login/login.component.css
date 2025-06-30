@@ -396,6 +396,18 @@
   transform: translateY(-1px);
 }
 
+.step-header {
+  @apply text-center mb-6;
+}
+
+.step-title {
+  @apply text-imdb-yellow text-xl font-semibold mb-2;
+}
+
+.step-description {
+  @apply text-white text-sm opacity-80;
+}
+
 .step-dots {
   @apply flex space-x-2 justify-center flex-1;
 }

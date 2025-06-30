@@ -30,7 +30,7 @@
   line-height: 1.2;
 }
 
-/* Movie Grid Wrapper with Auto Scroll */
+/* Movie Grid Wrapper with Manual Controls */
 .movie-grid-wrapper {
   position: relative;
   overflow: hidden;
@@ -40,23 +40,95 @@
 .movie-grid-container {
   display: flex;
   gap: 16px;
-  animation: autoScroll 60s linear infinite;
-  width: calc(240px * 20 + 16px * 19); /* Double the width for seamless loop */
+  transition: transform 0.5s ease-in-out;
+  width: calc(240px * 10 + 16px * 9); /* 10 cards */
 }
 
-/* Auto Scroll Animation */
-@keyframes autoScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-240px * 10 - 16px * 9)); /* Move by exactly 10 cards */
-  }
+/* Navigation Buttons */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: #ffffff;
 }
 
-/* Pause animation on hover */
-.movie-grid-container:hover {
-  animation-play-state: paused;
+.nav-button:hover:not(:disabled) {
+  background-color: rgba(245, 197, 24, 0.9);
+  border-color: #f5c518;
+  color: #000000;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.nav-button-prev {
+  left: 12px;
+}
+
+.nav-button-next {
+  right: 12px;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Slide Indicators */
+.slide-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 0 48px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.indicator:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+
+.indicator.active {
+  background-color: #f5c518;
+  transform: scale(1.3);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Movie Card */
@@ -90,26 +162,11 @@
   display: block;
 }
 
-/* Rank Number */
-.rank-number {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #f5c518;
-  font-size: 72px;
-  font-weight: 900;
-  padding: 0 8px;
-  line-height: 1;
-  z-index: 10;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
 /* Add to Watchlist Button */
 .add-to-watchlist {
   position: absolute;
   top: 8px;
-  right: 8px;
+  left: 8px;
   width: 32px;
   height: 32px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -393,21 +450,12 @@
     height: 300px;
   }
 
-  .rank-number {
-    font-size: 60px;
-  }
-
   .movie-grid-container {
-    width: calc(200px * 20 + 16px * 19);
+    width: calc(200px * 10 + 16px * 9);
   }
 
-  @keyframes autoScroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-200px * 10 - 16px * 9));
-    }
+  .slide-indicators {
+    padding: 0 24px;
   }
 }
 
@@ -430,26 +478,26 @@
     height: 240px;
   }
 
-  .rank-number {
-    font-size: 48px;
-  }
-
   .movie-title {
     font-size: 14px;
   }
 
   .movie-grid-container {
-    width: calc(160px * 20 + 16px * 19);
-    animation-duration: 45s;
+    width: calc(160px * 10 + 16px * 9);
   }
 
-  @keyframes autoScroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-160px * 10 - 16px * 9));
-    }
+  .slide-indicators {
+    padding: 0 16px;
+  }
+
+  .nav-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-icon {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -466,25 +514,26 @@
     height: 210px;
   }
 
-  .rank-number {
-    font-size: 36px;
-  }
-
   .section-title {
     font-size: 20px;
   }
 
   .movie-grid-container {
-    width: calc(140px * 20 + 12px * 19);
-    animation-duration: 40s;
+    width: calc(140px * 10 + 12px * 9);
   }
 
-  @keyframes autoScroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-140px * 10 - 12px * 9));
-    }
+  .nav-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
   }
 }
