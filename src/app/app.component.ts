@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   title = 'IMBD';
   currentUser: User | null = null;
   shouldShowNavbar = true;
+  mobileMenuOpen = false;
 
   constructor(private authService: AuthService, private router: Router) {
     this.router.events.subscribe((event) => {
@@ -32,5 +33,9 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 }

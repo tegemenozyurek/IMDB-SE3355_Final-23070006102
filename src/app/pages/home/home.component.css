@@ -1,96 +1,490 @@
-.home-container {
+/* IMDb Home Container */
+.imdb-home {
+  background-color: #121212;
   min-height: 100vh;
+  padding: 0;
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
-.hero-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  margin: 0 0 20px 0;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-.hero-content p {
-  font-size: 1.3rem;
-  margin: 0 0 40px 0;
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
-.hero-actions {
+/* Top 10 Section with Yellow Bar */
+.top10-section {
+  position: relative;
+  padding: 24px 48px 16px 48px;
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
 }
 
-.primary-button, .secondary-button {
-  padding: 15px 30px;
-  border: none;
+.yellow-bar {
+  width: 4px;
+  height: 32px;
+  background-color: #f5c518;
+  border-radius: 2px;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Movie Grid Wrapper with Auto Scroll */
+.movie-grid-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0 48px 48px 48px;
+}
+
+.movie-grid-container {
+  display: flex;
+  gap: 16px;
+  animation: autoScroll 60s linear infinite;
+  width: calc(240px * 20 + 16px * 19); /* Double the width for seamless loop */
+}
+
+/* Auto Scroll Animation */
+@keyframes autoScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-240px * 10 - 16px * 9)); /* Move by exactly 10 cards */
+  }
+}
+
+/* Pause animation on hover */
+.movie-grid-container:hover {
+  animation-play-state: paused;
+}
+
+/* Movie Card */
+.movie-card {
+  flex-shrink: 0;
+  width: 240px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Poster Container */
+.poster-container {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  margin-bottom: 8px;
   border-radius: 8px;
-  font-size: 1.1rem;
+  overflow: hidden;
+  background-color: #1f1f1f;
+}
+
+.movie-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Rank Number */
+.rank-number {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #f5c518;
+  font-size: 72px;
+  font-weight: 900;
+  padding: 0 8px;
+  line-height: 1;
+  z-index: 10;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Add to Watchlist Button */
+.add-to-watchlist {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 5;
+}
+
+.add-to-watchlist:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-color: #f5c518;
+}
+
+.plus-icon {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.add-to-watchlist:hover .plus-icon {
+  color: #f5c518;
+}
+
+/* Netflix Tag - Large */
+.netflix-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+/* Date Tags */
+.date-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.white-tag {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000000;
+}
+
+/* FX Logo */
+.fx-logo {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #ff6600;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 900;
+  padding: 8px 16px;
+  border-radius: 4px;
+  letter-spacing: 2px;
+}
+
+/* Netflix Badge */
+.netflix-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background-color: #e50914;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+/* Prime Logo */
+.prime-logo {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #00a8e1;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+/* HBO Badge */
+.hbo-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background-color: #9c4ec4;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+/* Movie Details */
+.movie-details {
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+
+/* Rating Container */
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.star-icon {
+  color: #f5c518;
+  font-size: 16px;
+}
+
+.rating-number {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.star-outline {
+  color: #5a5a5a;
+  font-size: 16px;
+}
+
+/* Movie Title */
+.movie-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 42px;
+}
+
+/* Watchlist Button */
+.watchlist-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #5799ef;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.watchlist-btn:hover {
+  color: #ffffff;
+}
+
+.plus-small {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.watchlist-text {
+  text-decoration: none;
+}
+
+.watchlist-btn:hover .watchlist-text {
+  text-decoration: underline;
+}
+
+/* Watch Options */
+.watch-options {
+  color: #5799ef;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.watch-options:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Trailer Section */
+.trailer-section {
+  padding: 0 4px;
+}
+
+.trailer-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+  width: 100%;
+}
+
+.trailer-button:hover {
+  color: #f5c518;
+}
+
+.play-icon {
+  font-size: 12px;
+}
+
+.trailer-text {
   text-decoration: none;
-  display: inline-block;
 }
 
-.primary-button {
-  background-color: #4CAF50;
-  color: white;
+.trailer-button:hover .trailer-text {
+  text-decoration: underline;
 }
 
-.primary-button:hover {
-  background-color: #45a049;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+/* Create duplicate cards for seamless loop */
+.movie-grid-container::after {
+  content: '';
+  display: flex;
+  gap: 16px;
 }
 
-.secondary-button {
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-}
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .top10-section,
+  .movie-grid-wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 
-.secondary-button:hover {
-  background-color: white;
-  color: #667eea;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-}
+  .movie-card {
+    width: 200px;
+  }
 
-.content-section {
-  background-color: #f8f9fa;
-  min-height: 500px;
+  .poster-container {
+    height: 300px;
+  }
+
+  .rank-number {
+    font-size: 60px;
+  }
+
+  .movie-grid-container {
+    width: calc(200px * 20 + 16px * 19);
+  }
+
+  @keyframes autoScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-200px * 10 - 16px * 9));
+    }
+  }
 }
 
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2rem;
+  .top10-section,
+  .movie-grid-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
   }
-  
-  .hero-content p {
-    font-size: 1.1rem;
+
+  .section-title {
+    font-size: 24px;
   }
-  
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
+
+  .movie-card {
+    width: 160px;
   }
-  
-  .primary-button, .secondary-button {
-    width: 200px;
+
+  .poster-container {
+    height: 240px;
   }
-} 
+
+  .rank-number {
+    font-size: 48px;
+  }
+
+  .movie-title {
+    font-size: 14px;
+  }
+
+  .movie-grid-container {
+    width: calc(160px * 20 + 16px * 19);
+    animation-duration: 45s;
+  }
+
+  @keyframes autoScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-160px * 10 - 16px * 9));
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-grid-container {
+    gap: 12px;
+  }
+
+  .movie-card {
+    width: 140px;
+  }
+
+  .poster-container {
+    height: 210px;
+  }
+
+  .rank-number {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .movie-grid-container {
+    width: calc(140px * 20 + 12px * 19);
+    animation-duration: 40s;
+  }
+
+  @keyframes autoScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-140px * 10 - 12px * 9));
+    }
+  }
+}

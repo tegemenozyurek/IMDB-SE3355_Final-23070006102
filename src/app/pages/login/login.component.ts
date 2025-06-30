@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   isLoginMode = true;
   isGmailLogin = false;
   currentStep = 1; // For multi-step registration
-  
+
   credentials: LoginCredentials = {
     username: '',
     password: ''
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     this.selectedCountryCode = countryCode;
     this.registerData.country = this.countries.find(c => c.code === countryCode)?.name || '';
     this.registerData.city = '';
-    
+
     this.authService.getCitiesByCountry(countryCode).subscribe(cities => {
       this.cities = cities;
     });
@@ -149,8 +149,8 @@ export class LoginComponent implements OnInit {
     } else {
       if (this.currentStep < 3) {
         this.nextStep();
-      } else {
-        this.handleRegister();
+    } else {
+      this.handleRegister();
       }
     }
   }
@@ -158,6 +158,18 @@ export class LoginComponent implements OnInit {
   handleLogin(): void {
     if (!this.credentials.username || !this.credentials.password) {
       this.error = 'Username and password are required';
+      return;
+    }
+
+    // Temporary login credentials
+    if (this.credentials.username === 'buse' && this.credentials.password === '12345') {
+      this.loading = true;
+      this.error = '';
+
+      setTimeout(() => {
+        this.loading = false;
+        this.router.navigate(['/home']);
+      }, 1000);
       return;
     }
 
@@ -182,8 +194,8 @@ export class LoginComponent implements OnInit {
   }
 
   handleRegister(): void {
-    if (!this.registerData.name || !this.registerData.surname || !this.registerData.email || 
-        !this.registerData.password || !this.registerData.repassword || 
+    if (!this.registerData.name || !this.registerData.surname || !this.registerData.email ||
+        !this.registerData.password || !this.registerData.repassword ||
         !this.registerData.country || !this.registerData.city) {
       this.error = 'All fields are required';
       return;
@@ -223,7 +235,7 @@ export class LoginComponent implements OnInit {
     // Demo Gmail girişi
     this.loading = true;
     this.error = '';
-    
+
     setTimeout(() => {
       this.loading = false;
       // Demo kullanıcı ile giriş yap
@@ -234,4 +246,4 @@ export class LoginComponent implements OnInit {
       this.handleLogin();
     }, 2000);
   }
-} 
+}

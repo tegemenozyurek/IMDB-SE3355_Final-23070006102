@@ -86,8 +86,8 @@ export class AuthService {
 
   login(credentials: LoginCredentials): Observable<AuthResponse | null> {
     // Demo login - gerçek uygulamada API çağrısı yapılır
-    const user = this.users.find(u => 
-      u.username === credentials.username && 
+    const user = this.users.find(u =>
+      u.username === credentials.username &&
       credentials.password === '123456' // Demo şifre
     );
 
@@ -168,4 +168,4 @@ export class AuthService {
     const country = this.countries.find(c => c.code === countryCode);
     return of(country ? country.cities : []);
   }
-} 
+}
