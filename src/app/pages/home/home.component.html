@@ -23,12 +23,12 @@
 
     <div class="movie-grid-container" #movieGrid>
       <!-- Movie Card 1 - 3 Body Problem -->
-      <div class="movie-card">
+      <div class="movie-card" (click)="openMovieModal('3 Body Problem')">
         <div class="poster-container">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWFjYjUtMGZhNzQ3ODk4Njc0XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg" alt="3 Body Problem" class="movie-poster">
+          <img src="https://dnm.nflximg.net/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXmTGsNNF7givL2uVSqriqrcOq4lU5uMs-on1XxwI0wbkYLbnHfkyo9pErJRLjqafCx3N-YrY4iTnIAr6W5vVUk0gNLw34dZBKc9bDmqnIOdOsYRRVxisjghALvuXgPtuPIhWQ.jpg?r=f47" alt="3 Body Problem" class="movie-poster">
           <div class="creators-tag netflix-tag">FROM THE CREATORS OF GAME OF THRONES<br>A NETFLIX SERIES</div>
           <div class="date-tag">MARCH 21</div>
         </div>
@@ -36,7 +36,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">7.7</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">3 Body Problem</h3>
           <button class="watchlist-btn">
@@ -45,30 +44,29 @@
           </button>
         </div>
         <div class="trailer-section">
-          <button class="trailer-button">
+          <button class="trailer-button" (click)="openTrailer('SdvzhCL7vIA')">
             <span class="play-icon">▶</span>
             <span class="trailer-text">Trailer</span>
           </button>
         </div>
       </div>
 
-      <!-- Movie Card 2 - Shōgun -->
-      <div class="movie-card">
+      <!-- Movie Card 2 - The Idea of You -->
+      <div class="movie-card" (click)="openMovieModal('The Idea of You')">
         <div class="poster-container">
           <div class="add-to-watchlist">
             <span class="plus-icon">+</span>
           </div>
-          <img src="https://m.media-amazon.com/images/M/MV5BNGFlYWQzNTQtZjI0OS00MDgyLTk1NzMtMDcxZjhjZTI2M2Q1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Shōgun" class="movie-poster">
-          <div class="fx-logo">FX</div>
-          <div class="date-tag">FEB 2024 hulu FX</div>
+          <img src="https://m.media-amazon.com/images/M/MV5BNGFlYWQzNTQtZjI0OS00MDgyLTk1NzMtMDcxZjhjZTI2M2Q1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="The Idea of You" title="The Idea of You" class="movie-poster">
+          <div class="prime-logo">prime</div>
+          <div class="date-tag">MAY 2</div>
         </div>
         <div class="movie-details">
           <div class="rating-container">
             <span class="star-icon">★</span>
-            <span class="rating-number">9.1</span>
-            <span class="star-outline">☆</span>
+            <span class="rating-number">6.6</span>
           </div>
-          <h3 class="movie-title">Shōgun</h3>
+          <h3 class="movie-title">The Idea of You</h3>
           <button class="watchlist-btn">
             <span class="plus-small">+</span>
             <span class="watchlist-text">Watchlist</span>
@@ -95,7 +93,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">6.6</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">Godzilla X Kong:<br>The New Empire</h3>
           <button class="watchlist-btn">
@@ -124,7 +121,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">8.2</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">The Gentlemen</h3>
           <button class="watchlist-btn">
@@ -153,7 +149,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">6.2</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">Road House</h3>
           <div class="watch-options">Watch options</div>
@@ -179,7 +174,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">8.8</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">Dune: Part Two</h3>
           <button class="watchlist-btn">
@@ -208,7 +202,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">7.1</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">Avatar: The Last Airbender</h3>
           <button class="watchlist-btn">
@@ -237,7 +230,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">8.7</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">The Bear</h3>
           <button class="watchlist-btn">
@@ -266,7 +258,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">7.9</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">Nobody Wants This</h3>
           <button class="watchlist-btn">
@@ -295,7 +286,6 @@
           <div class="rating-container">
             <span class="star-icon">★</span>
             <span class="rating-number">8.4</span>
-            <span class="star-outline">☆</span>
           </div>
           <h3 class="movie-title">House of the Dragon</h3>
           <button class="watchlist-btn">
@@ -323,6 +313,142 @@
         [attr.title]="'Go to slide ' + (i + 1)">
         <span class="sr-only">{{i + 1}}</span>
       </button>
+      </div>
     </div>
   </div>
+
+<!-- YouTube Trailer Modal -->
+<div *ngIf="showTrailerModal" class="trailer-modal-overlay" (click)="closeTrailer()">
+  <div class="trailer-modal-content" (click)="$event.stopPropagation()">
+    <button class="trailer-close-btn" (click)="closeTrailer()">×</button>
+        <div class="trailer-video-container">
+      <iframe
+        [src]="safeTrailerUrl"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; encrypted-media"
+        title="Movie Trailer Video">
+      </iframe>
+    </div>
   </div>
+</div>
+
+<!-- Movie Detail Modal -->
+<div *ngIf="showMovieModal && selectedMovie" class="movie-modal-overlay" (click)="closeMovieModal()">
+  <div class="movie-modal-fullscreen" (click)="$event.stopPropagation()">
+    <!-- Close Button - Moved to top for better visibility -->
+    <button class="close-btn-fullscreen" (click)="closeMovieModal()">×</button>
+
+    <!-- Top Header -->
+    <div class="movie-header-top">
+      <h1 class="movie-title-fullscreen">{{ selectedMovie.title }}</h1>
+      <div class="movie-meta-top">
+        <span class="movie-year-meta">{{ selectedMovie.year }}</span>
+        <span class="movie-separator">•</span>
+        <span class="movie-certificate-meta">{{ selectedMovie.certificate }}</span>
+        <span class="movie-separator">•</span>
+        <span class="movie-duration-meta">{{ selectedMovie.duration }}</span>
+      </div>
+    </div>
+
+    <!-- Rating Section - Top Right -->
+    <div class="imdb-rating-top-right">
+      <span class="imdb-label">IMDb RATING</span>
+      <div class="rating-display-top">
+        <span class="star-icon-top">★</span>
+        <span class="rating-number-top">{{ selectedMovie.rating }}</span>
+        <span class="rating-total-top">/10</span>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="movie-main-content">
+      <!-- Left: Movie Poster -->
+      <div class="movie-poster-left">
+        <button class="add-to-watchlist-fullscreen">
+          <span class="plus-icon-fullscreen">+</span>
+        </button>
+        <img [src]="selectedMovie.poster" [alt]="selectedMovie.title" [title]="selectedMovie.title" class="movie-poster-fullscreen">
+      </div>
+
+      <!-- Right: Full Video Player -->
+      <div class="movie-video-fullscreen">
+        <div class="video-container-fullscreen" [style.background-image]="'url(' + selectedMovie.backdrop + ')'">
+          <button class="play-btn-fullscreen" (click)="playTrailerFromModal()">
+            <span class="play-icon-fullscreen">▶</span>
+          </button>
+          <div class="video-info-overlay">
+            <span class="trailer-text-overlay">Play trailer with sound</span>
+            <span class="video-duration-overlay">2:21</span>
+          </div>
+          <div class="prime-badge">prime</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Write a Review Button -->
+    <div class="review-section">
+      <button class="write-review-btn" (click)="openReviewModal()">
+        <span class="review-icon">✍️</span>
+        <span class="review-text">Write a Review</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Review Modal -->
+<div *ngIf="showReviewModal" class="review-modal-overlay" (click)="closeReviewModal()">
+  <div class="review-modal-content" (click)="$event.stopPropagation()">
+    <div class="review-modal-header">
+      <h2>Write a Review for {{ selectedMovie?.title }}</h2>
+      <button class="review-close-btn" (click)="closeReviewModal()">×</button>
+    </div>
+
+    <div class="review-modal-body">
+      <!-- Star Rating -->
+      <div class="star-rating-section">
+        <h3>Your Rating</h3>
+        <div class="star-rating-container">
+          <span
+            *ngFor="let star of [1,2,3,4,5,6,7,8,9,10]; let i = index"
+            class="rating-star"
+            [class.filled]="i < userRating"
+            [class.hover]="i < hoveredRating"
+            (click)="setRating(i + 1)"
+            (mouseenter)="hoverRating(i + 1)"
+            (mouseleave)="unhoverRating()">
+            ★
+          </span>
+        </div>
+        <div class="rating-display" *ngIf="userRating > 0">
+          {{ userRating }}/10 stars
+        </div>
+      </div>
+
+      <!-- Review Text -->
+      <div class="review-text-section">
+        <h3>Your Review</h3>
+        <textarea
+          [(ngModel)]="userReviewText"
+          placeholder="Share your thoughts about this movie..."
+          class="review-textarea"
+          rows="6">
+        </textarea>
+        <div class="character-count">{{ userReviewText ? userReviewText.length : 0 }}/500</div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="review-submit-section">
+                <button
+          class="submit-review-btn"
+          [disabled]="!userRating || !userReviewText || !userReviewText.trim()"
+          (click)="submitReview()">
+          Submit Review
+        </button>
+        <button class="cancel-review-btn" (click)="closeReviewModal()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

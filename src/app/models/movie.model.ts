@@ -7,6 +7,14 @@ export interface Movie {
   genre: string;
   description: string;
   posterUrl?: string;
+  trailer?: string;
+  releaseDate?: string;
+  certificate?: string;
+  duration?: string;
+  backdrop?: string;
+  ratingCount?: string;
+  actors?: string[];
+  plot?: string;
 }
 
 export interface MovieSearchParams {
@@ -15,4 +23,4 @@ export interface MovieSearchParams {
   genre?: string;
   year?: number;
   minRating?: number;
-} 
+}

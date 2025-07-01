@@ -152,12 +152,50 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
+  // Authenticate Google user
+  authenticateGoogleUser(googleUser: any): Observable<AuthResponse | null> {
+    // Convert Google user to our User format
+    const user: User = {
+      id: this.users.length + 1,
+      username: googleUser.email.split('@')[0],
+      email: googleUser.email,
+      name: googleUser.name.split(' ')[0] || googleUser.name,
+      surname: googleUser.name.split(' ').slice(1).join(' ') || '',
+      country: 'Unknown',
+      city: 'Unknown'
+    };
+
+    // Add to users array (in real app, this would be handled by backend)
+    if (!this.users.find(u => u.email === user.email)) {
+      this.users.push(user);
+    }
+
+    const response: AuthResponse = {
+      user: user,
+      token: 'google-token-' + Date.now()
+    };
+
+    // Store user info
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('authToken', response.token);
+    localStorage.setItem('isAuthenticated', 'true');
+    this.currentUserSubject.next(user);
+
+    return of(response);
+  }
+
   isAuthenticated(): boolean {
     return this.currentUserSubject.value !== null;
   }
 
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
+  }
+
+  setCurrentUser(user: User): void {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('isAuthenticated', 'true');
+    this.currentUserSubject.next(user);
   }
 
   getCountries(): Observable<Country[]> {

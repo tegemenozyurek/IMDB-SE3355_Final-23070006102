@@ -216,7 +216,7 @@
               </div>
             </div>
           </div>
-        </div>
+      </div>
 
 
 
@@ -252,18 +252,93 @@
         <button class="close-button" (click)="closeSignInModal()">×</button>
       </div>
       <div class="modal-content">
-        <p>Choose how you want to sign in to IMDb</p>
-        <button class="signin-option-btn" (click)="navigateToLogin()">
-          <span>Sign in with IMDb</span>
-        </button>
+        <!-- Sign In Form -->
+        <form class="signin-form" (ngSubmit)="handleLogin()" #loginForm="ngForm">
+          <div class="form-group">
+            <label class="form-label">Email or IMDb username</label>
+            <input
+              type="text"
+              [(ngModel)]="loginData.email"
+              name="loginEmail"
+              class="form-control"
+              placeholder="Enter your email"
+              required
+              autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              [(ngModel)]="loginData.password"
+              name="loginPassword"
+              class="form-control"
+              placeholder="Enter your password"
+              required
+              autocomplete="current-password">
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="submit"
+              class="signin-submit-btn"
+              [disabled]="!loginData.email || !loginData.password">
+              Sign In
+            </button>
+          </div>
+        </form>
+
         <div class="divider">
           <span>or</span>
         </div>
-        <button class="signin-option-btn google-btn">
-          <span>Sign in with Google</span>
+
+        <button class="signin-option-btn google-btn" (click)="signInWithGoogle()" [disabled]="googleSignInLoading">
+          <span *ngIf="!googleSignInLoading">Sign in with Google</span>
+          <span *ngIf="googleSignInLoading">Signing in...</span>
         </button>
+
         <div class="modal-footer">
           <p>New to IMDb? <a href="#" (click)="navigateToRegister(); $event.preventDefault(); $event.stopPropagation()">Create account</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Account Selection Modal -->
+  <div class="signin-modal-overlay" *ngIf="isGoogleAccountModalOpen" (click)="closeGoogleAccountModal()">
+    <div class="signin-modal google-account-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="google-header">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <h2>Choose an account</h2>
+        </div>
+        <button class="close-button" (click)="closeGoogleAccountModal()">×</button>
+      </div>
+      <div class="modal-content google-accounts">
+        <p class="modal-subtitle">to continue to IMDb</p>
+
+        <div class="account-list">
+          <div class="account-item" *ngFor="let account of googleAccounts" (click)="selectGoogleAccount(account)">
+            <img [src]="account.picture" [alt]="account.name" [title]="account.name" class="account-avatar">
+            <div class="account-info">
+              <div class="account-name">{{ account.name }}</div>
+              <div class="account-email">{{ account.email }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-actions">
+          <button class="account-action-btn" (click)="closeGoogleAccountModal()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.11 3.89 23 5 23H19C20.11 23 21 22.11 21 21V9M19 9H13V3H5V21H19V9Z"/>
+            </svg>
+            Use another account
+          </button>
         </div>
       </div>
     </div>
@@ -325,7 +400,7 @@
                class="form-control"
                placeholder="Enter your email address"
                required
-               autocomplete="new-email"
+               autocomplete="email"
                name="register-email"
              >
            </div>

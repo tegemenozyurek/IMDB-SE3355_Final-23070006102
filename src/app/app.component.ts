@@ -27,6 +27,14 @@ export class AppComponent implements OnInit {
   isSignInModalOpen = false;
   isRegisterModalOpen = false;
   isIMDbProModalOpen = false;
+  googleSignInLoading = false;
+  isGoogleAccountModalOpen = false;
+
+  // Login form properties
+  loginData = {
+    email: '',
+    password: ''
+  };
 
   // Register form properties
   registerCurrentStep = 1;
@@ -46,12 +54,36 @@ export class AppComponent implements OnInit {
   registerError = '';
   registerLoading = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  // Google accounts for demo
+  googleAccounts = [
+    {
+      email: 'john.doe@gmail.com',
+      name: 'John Doe',
+      picture: 'https://via.placeholder.com/40/4285F4/FFFFFF?text=JD'
+    },
+    {
+      email: 'jane.smith@gmail.com',
+      name: 'Jane Smith',
+      picture: 'https://via.placeholder.com/40/EA4335/FFFFFF?text=JS'
+    },
+    {
+      email: 'demo.user@gmail.com',
+      name: 'Demo User',
+      picture: 'https://via.placeholder.com/40/34A853/FFFFFF?text=DU'
+    }
+  ];
+
+    constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.shouldShowNavbar = event.url !== '/login';
     });
+
+
   }
 
   ngOnInit(): void {
@@ -98,6 +130,11 @@ export class AppComponent implements OnInit {
     console.log('Dropdown clicked, current state:', this.isSearchDropdownOpen);
     this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
     console.log('New dropdown state:', this.isSearchDropdownOpen);
+
+    // Force update the view
+    setTimeout(() => {
+      console.log('Dropdown state after timeout:', this.isSearchDropdownOpen);
+    }, 100);
   }
 
   selectSearchCategory(category: string, event?: Event) {
@@ -116,6 +153,35 @@ export class AppComponent implements OnInit {
 
   closeSignInModal() {
     this.isSignInModalOpen = false;
+    // Reset login form
+    this.loginData = {
+      email: '',
+      password: ''
+    };
+  }
+
+  handleLogin() {
+    if (this.loginData.email && this.loginData.password) {
+      // Simulate login process
+      console.log('Login attempt:', this.loginData);
+
+      // For demo purposes, accept any credentials
+      const mockUser: User = {
+        id: 1,
+        username: this.loginData.email.split('@')[0] || 'demo',
+        email: this.loginData.email,
+        name: 'Demo User'
+      };
+
+      // Set user as logged in
+      this.authService.setCurrentUser(mockUser);
+
+      // Close modal and navigate to home
+      this.closeSignInModal();
+      this.router.navigate(['/home']);
+
+      console.log('Login successful');
+    }
   }
 
     openRegisterModal() {
@@ -276,5 +342,53 @@ export class AppComponent implements OnInit {
         console.error('Register error:', error);
       }
     });
+  }
+
+      // Google Sign-In method
+  signInWithGoogle() {
+    console.log('Google Sign-In button clicked');
+    this.openGoogleAccountModal();
+  }
+
+  // Google Account Modal methods
+  openGoogleAccountModal() {
+    this.isGoogleAccountModalOpen = true;
+  }
+
+  closeGoogleAccountModal() {
+    this.isGoogleAccountModalOpen = false;
+  }
+
+  selectGoogleAccount(account: any) {
+    console.log('Selected Google account:', account);
+    this.googleSignInLoading = true;
+    this.closeGoogleAccountModal();
+
+    // Simulate authentication delay
+    setTimeout(() => {
+      const googleUser = {
+        email: account.email,
+        name: account.name,
+        picture: account.picture,
+        googleId: 'google-id-' + Date.now()
+      };
+
+      // Authenticate with our auth service
+      this.authService.authenticateGoogleUser(googleUser).subscribe({
+        next: (response) => {
+          if (response) {
+            this.currentUser = response.user;
+            this.googleSignInLoading = false;
+            this.closeSignInModal();
+            this.router.navigate(['/home']);
+            console.log('Google Sign-In successful!');
+          }
+        },
+        error: (error) => {
+          console.error('Google authentication error:', error);
+          this.googleSignInLoading = false;
+        }
+      });
+    }, 800);
   }
 }
